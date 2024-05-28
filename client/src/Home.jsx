@@ -1,45 +1,46 @@
 import React, { useState } from "react";
+import "./Home.css";
 
 function Home() {
-    const [todos, setTodos] = useState([]);
+    const [questions, setQuestions] = useState([]);
     const [inputValue, setInputValue] = useState("");
 
-    const handleAddTodo = () => {
+    const handleAddQuestion = () => {
         if (inputValue.trim() !== "") {
-            const newTodo = {
+            const newQuestion = {
                 text: inputValue,
                 time: new Date().toLocaleString(),
                 liked: false,
                 disliked: false
             };
-            setTodos([...todos, newTodo]);
+            setQuestions([...questions, newQuestion]);
             setInputValue("");
         }
     };
 
-    const handleDeleteTodo = (index) => {
-        const newTodos = todos.filter((todo, i) => i !== index);
-        setTodos(newTodos);
+    const handleDeleteQuestion = (index) => {
+        const newQuestions = questions.filter((question, i) => i !== index);
+        setQuestions(newQuestions);
     };
 
     const handleToggleLike = (index) => {
-        const newTodos = todos.map((todo, i) => {
+        const newQuestions = questions.map((question, i) => {
             if (i === index) {
-                return { ...todo, liked: !todo.liked, disliked: false };
+                return { ...question, liked: !question.liked, disliked: false };
             }
-            return todo;
+            return question;
         });
-        setTodos(newTodos);
+        setQuestions(newQuestions);
     };
 
     const handleToggleDislike = (index) => {
-        const newTodos = todos.map((todo, i) => {
+        const newQuestions = questions.map((question, i) => {
             if (i === index) {
-                return { ...todo, disliked: !todo.disliked, liked: false };
+                return { ...question, disliked: !question.disliked, liked: false };
             }
-            return todo;
+            return question;
         });
-        setTodos(newTodos);
+        setQuestions(newQuestions);
     };
 
     return (
@@ -50,21 +51,21 @@ function Home() {
                     type="text"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                    placeholder="Add a new todo"
+                    placeholder="Užduokite klausimą"
                 />
-                <button onClick={handleAddTodo}>Add</button>
+                <button onClick={handleAddQuestion}>Paklausti</button>
             </div>
             <ul>
-                {todos.map((todo, index) => (
+                {questions.map((question, index) => (
                     <li key={index}>
-                        <span>{todo.text}</span> <span>({todo.time})</span>
+                        <span>{question.text}</span> <span>({question.time})</span>
                         <button onClick={() => handleToggleLike(index)}>
-                            {todo.liked ? "Unlike" : "Like"}
+                            {question.liked ? "Unlike" : "Like"}
                         </button>
                         <button onClick={() => handleToggleDislike(index)}>
-                            {todo.disliked ? "Undislike" : "Dislike"}
+                            {question.disliked ? "Undislike" : "Dislike"}
                         </button>
-                        <button onClick={() => handleDeleteTodo(index)}>Delete</button>
+                        <button onClick={() => handleDeleteQuestion(index)}>Delete</button>
                     </li>
                 ))}
             </ul>
