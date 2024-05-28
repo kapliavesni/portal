@@ -44,28 +44,29 @@ function Home() {
     };
 
     return (
-        <div>
+        <div className="container">
             <h1>Paklausk</h1>
-            <div>
+            <div className="input-container">
                 <input
                     type="text"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder="Užduokite klausimą"
                 />
-                <button onClick={handleAddQuestion}>Paklausti</button>
+                <button className="button" onClick={handleAddQuestion}>Paklausti</button>
             </div>
-            <ul>
+            <ul className="question-list">
                 {questions.map((question, index) => (
-                    <li key={index}>
-                        <span>{question.text}</span> <span>({question.time})</span>
-                        <button onClick={() => handleToggleLike(index)}>
+                    <li key={index} className="question-item">
+                        <span  className="question-text">{question.text}</span> 
+                        <span className="question-time">({question.time})</span>
+                        <button onClick={() => handleToggleLike(index)}  className="button-group">
                             {question.liked ? "Unlike" : "Like"}
                         </button>
-                        <button onClick={() => handleToggleDislike(index)}>
+                        <button onClick={() => handleToggleDislike(index)}  className="button-group">
                             {question.disliked ? "Undislike" : "Dislike"}
                         </button>
-                        <button onClick={() => handleDeleteQuestion(index)}>Delete</button>
+                        <button onClick={() => handleDeleteQuestion(index)}  className="button-group">Delete</button>
                     </li>
                 ))}
             </ul>
